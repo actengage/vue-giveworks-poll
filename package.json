@@ -1,0 +1,78 @@
+{
+    "name": "patriotpoll",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "release-patch": "npm version patch --no-git-tag-version; npm run release;",
+        "release-minor": "npm version minor --no-git-tag-version; npm run release;",
+        "release-major": "npm version major --no-git-tag-version; npm run release;",
+        "release": "npm run build; npm run commit; npm publish; git push;"
+    },
+    "dependencies": {
+        "@bugsnag/js": "^5.2.0",
+        "@bugsnag/plugin-vue": "^5.2.0",
+        "@fortawesome/fontawesome": "^1.1.8",
+        "@fortawesome/fontawesome-svg-core": "^1.2.15",
+        "@fortawesome/free-brands-svg-icons": "^5.7.2",
+        "@fortawesome/free-regular-svg-icons": "^5.7.2",
+        "@fortawesome/free-solid-svg-icons": "^5.7.2",
+        "@fortawesome/vue-fontawesome": "^0.1.5",
+        "axios": "^0.18.0",
+        "d3": "^5.9.1",
+        "moment": "^2.24.0",
+        "randomcolor": "^0.5.4",
+        "vue": "^2.6.7",
+        "vue-interface": "^0.3.22",
+        "vue-router": "^3.0.2",
+        "vuex": "^3.1.0"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^3.4.1",
+        "@vue/cli-plugin-eslint": "^3.4.1",
+        "@vue/cli-service": "^3.4.1",
+        "babel-eslint": "^10.0.1",
+        "babel-plugin-lodash": "^3.3.4",
+        "css-loader": "^2.1.0",
+        "eslint": "^5.14.1",
+        "eslint-plugin-vue": "^5.2.2",
+        "inline-css": "^2.4.1",
+        "lodash-webpack-plugin": "^0.11.5",
+        "node-sass": "^4.11.0",
+        "postcss-html": "^0.34.0",
+        "postcss-loader": "^3.0.0",
+        "postcss-safe-parser": "^4.0.1",
+        "postcss-scss": "^2.0.0",
+        "postcss-syntax": "^0.34.0",
+        "sass-loader": "^7.1.0",
+        "vue-style-loader": "^4.1.2",
+        "vue-template-compiler": "^2.6.7"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "rules": {},
+        "parserOptions": {
+            "parser": "babel-eslint"
+        }
+    },
+    "postcss": {
+        "plugins": {
+            "autoprefixer": {}
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ],
+    "watch": "npm run build"
+}

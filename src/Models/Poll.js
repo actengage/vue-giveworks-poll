@@ -8,7 +8,7 @@ export default class Poll extends Model {
      * @return string
      */
     endpoint() {
-        return '/api/public/v1/polls';
+        return 'polls';
     }
 
     /**
@@ -20,9 +20,10 @@ export default class Poll extends Model {
         return [
             this.endpoint(),
             this.id()
-        ].concat([].slice.call(arguments))
-        .join('/')
-        .replace(/\/\//, '/');
+        ]
+            .concat([].slice.call(arguments))
+            .join('/')
+            .replace(/\/\//, '/');
     }
 
     /**
@@ -32,7 +33,9 @@ export default class Poll extends Model {
      * @return bool
      */
     save(data = {}, config = {}) {
-        return this.create(data, config);
+        return super.save(data, Object.assign(config, {
+            method: 'post'
+        }));
     }
 
 }

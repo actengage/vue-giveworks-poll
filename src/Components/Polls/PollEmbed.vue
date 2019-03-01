@@ -1,11 +1,11 @@
 <template>
 
-    <div v-if="poll" class="poll-embed" :class="`poll-embed-${align}`">
+    <div class="poll-embed" :class="`poll-embed-${align}`">
         <component
-            v-if="poll.options.strategy"
-            v-bind="poll.options.strategy.embed.props"
+            v-if="strategy"
+            v-bind="strategy.embed.props"
             :image="poll.embed ? poll.embed.url : null"
-            :is="poll.options.strategy.embed.component"
+            :is="strategy.embed.component"
             @loaded="$emit('loaded')"
         />
     </div>
@@ -13,13 +13,18 @@
 </template>
 
 <script>
+import HasStrategy from '@/Mixins/HasStrategy';
 import Twitter from '@/Components/Embeds/Twitter';
 import Youtube from '@/Components/Embeds/Youtube';
 import Facebook from '@/Components/Embeds/Facebook';
 
 export default {
 
-    name: 'poll-embed',
+    name: 'PollEmbed',
+
+    mixins: [
+        HasStrategy
+    ],
 
     components: {
         Twitter,
@@ -35,11 +40,6 @@ export default {
             validate(value) {
                 return ['left', 'right', 'center'].indexOf(value) !== -1;
             }
-        },
-
-        poll: {
-            type: Object,
-            required: true
         }
 
     }

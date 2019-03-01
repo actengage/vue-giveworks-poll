@@ -7,6 +7,8 @@
 <script>
 export default {
 
+    inheritAttrs: false,
+
     name: 'youtube',
 
     props: {

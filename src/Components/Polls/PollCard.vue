@@ -80,7 +80,7 @@ export default {
     computed: {
 
         image() {
-            return this.poll.embed || this.poll.image;
+            return this.poll.embed;
         }
 
     }

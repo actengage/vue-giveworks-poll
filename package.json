@@ -1,11 +1,11 @@
 {
-    "name": "patriotpoll",
-    "private": true,
-    "version": "1.0.0",
+    "name": "vue-giveworks-poll",
+    "version": "0.2.0",
     "scripts": {
         "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
+        "build": "vue-cli-service build --target lib --name GiveworksPoll ./src/export.js",
         "lint": "vue-cli-service lint",
+        "test:unit": "vue-cli-service test:unit",
         "release-patch": "npm version patch --no-git-tag-version; npm run release;",
         "release-minor": "npm version minor --no-git-tag-version; npm run release;",
         "release-major": "npm version major --no-git-tag-version; npm run release;",
@@ -24,10 +24,9 @@
         "d3": "^5.9.1",
         "moment": "^2.24.0",
         "randomcolor": "^0.5.4",
-        "vue": "^2.6.7",
-        "vue-interface": "^0.3.22",
-        "vue-router": "^3.0.2",
-        "vuex": "^3.1.0"
+        "vue": "^2.6.8",
+        "vue-interface": "^0.3.23",
+        "vue-router": "^3.0.2"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.4.1",
@@ -48,7 +47,7 @@
         "postcss-syntax": "^0.34.0",
         "sass-loader": "^7.1.0",
         "vue-style-loader": "^4.1.2",
-        "vue-template-compiler": "^2.6.7"
+        "vue-template-compiler": "^2.6.8"
     },
     "eslintConfig": {
         "root": true,

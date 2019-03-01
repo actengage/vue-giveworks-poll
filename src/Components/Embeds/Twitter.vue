@@ -18,6 +18,8 @@ import ActivityIndicator from 'vue-interface/src/Components/ActivityIndicator';
 
 export default {
 
+    inheritAttrs: false,
+
     name: 'twitter',
 
     components: {

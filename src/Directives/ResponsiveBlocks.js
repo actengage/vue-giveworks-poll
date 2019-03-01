@@ -76,7 +76,7 @@ function resize(el, binding, vnode) {
     const isObject = binding.value instanceof Object;
 
     const options = Object.assign({
-            selector: !isObject ? binding.value : null
+        selector: !isObject ? binding.value : null
     }, isObject ? binding.value : null);
 
     if(!options.selector) {
@@ -124,4 +124,4 @@ export default {
         window.removeEventListener('resize', resize);
     }
 
-}
+};

@@ -4,6 +4,7 @@
         :data="form"
         :model="model"
         :headers="headers"
+        :request="request"
         class="poll-form"
         @submit="onSubmit"
         @submit-failed="onSubmitFailed"
@@ -12,7 +13,7 @@
     
         <poll-date :poll="poll" />
 
-        <h2 v-if="poll.question" class="text-center" v-html="poll.question" />
+        <h2 v-if="poll.question" class="poll-header" v-html="poll.question" />
 
         <slide-deck :active="active" @enter="onSlideEnter">
 
@@ -38,11 +39,11 @@
 import BaseForm from 'vue-interface/src/Components/BaseForm';
 import SlideDeck from 'vue-interface/src/Components/SlideDeck';
 
-import Poll from '@/Models/Poll';
-import PollDate from '@/Components/Polls/PollDate';
-import PollResults from '@/Components/Polls/PollResults';
-import PollQuestion from '@/Components/Polls/PollQuestion';
-import PollFormFields from '@/Components/Polls/PollFormFields';
+import PollDate from './PollDate';
+import Poll from '../../Models/Poll';
+import PollResults from './PollResults';
+import PollQuestion from './PollQuestion';
+import PollFormFields from './PollFormFields';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPoll } from '@fortawesome/free-solid-svg-icons/faPoll';
@@ -98,6 +99,13 @@ export default {
         poll: {
             type: Object,
             required: true
+        },
+
+        request: {
+            type: Object,
+            default() {
+                return {};
+            }
         }
 
     },

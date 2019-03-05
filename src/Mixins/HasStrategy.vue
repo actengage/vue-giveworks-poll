@@ -1,6 +1,6 @@
 <script>
-import match from '@/Components/Polls/Helpers/Match';            
-import Strategy from '@/Components/Polls/Helpers/Strategy';
+import match from '../Components/Polls/Helpers/Match';            
+import Strategy from '../Components/Polls/Helpers/Strategy';
 
 export default {
 

@@ -132,6 +132,7 @@ import Wizard from 'vue-interface/src/Components/Wizard';
 import WizardStep from 'vue-interface/src/Components/Wizard/WizardStep';
 import WizardSuccess from 'vue-interface/src/Components/Wizard/WizardSuccess';
 
+import match from './Helpers/Match';
 import Poll from '@/Models/Admin/Poll';
 import Media from '@/Models/Admin/Media';
 import Datepicker from '@/Directives/Datepicker';
@@ -139,7 +140,6 @@ import Twitter from '@/Components/Embeds/Twitter';
 import Youtube from '@/Components/Embeds/Youtube';
 import Breadcrumbing from '@/Mixins/Breadcrumbing';
 import Facebook from '@/Components/Embeds/Facebook';
-import match from '@/Components/Polls/Helpers/Match';
 import VerticalNavigation from '@/Components/Navigation/VerticalNavigation';
 
 import { library } from '@fortawesome/fontawesome-svg-core';

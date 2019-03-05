@@ -1,0 +1,50 @@
+// Styling for the signup section
+
+#signup {
+	display: flex;
+	background-color: white;
+
+	h2.section-heading {
+		padding-bottom: 25px;
+		color: $primary-blue;
+	}
+
+	.btn-row {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.form-row {
+		.btn {
+			@include body-font;
+			padding: 20px 40px 20px 40px;
+			text-align: center;
+			border-radius: 50px;
+			background-color: $primary-blue;
+			border: none;
+			text-transform: uppercase;
+			font-weight: 700;
+			letter-spacing: 1px;
+			margin-top: 40px;
+			box-shadow: inset 2px -4px darken($primary-blue, 10%);
+
+			&:hover {
+				background-color: darken($primary-blue, 10%) !important;
+				}
+
+			&:active {
+				background-color: darken($primary-blue, 10%) !important;
+				}
+		}
+	}
+
+	input.form-control {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04), 0 6px 20px 0 rgba(0, 0, 0, 0.04);
+    	border-color: rgba(0, 0, 0, 0.05);
+    	border-radius: 0;
+    	padding: 25px;
+    	margin-bottom: 15px;
+
+	}
+}

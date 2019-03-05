@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import Poll from '@/Models/Poll';
-import PollCard from '@/Components/Polls/PollCard';
-import HttpRequestOptions from '@/Mixins/HttpRequestOptions';
+import PollCard from './PollCard';
+import Poll from '../../Models/Poll';
+import HttpRequestOptions from '../../Mixins/HttpRequestOptions';
 import BtnActivity from 'vue-interface/src/Components/BtnActivity';
 import ActivityIndicator from 'vue-interface/src/Components/ActivityIndicator';
 
@@ -63,10 +63,10 @@ export default {
                 page: page
             }, this.httpRequestOptions)
                 .then(response => {
-                    response.data.forEach(poll => {
-                        this.polls.push(poll.toJson());
-                    });
-
+                    response.data.data.forEach(poll => {
+                        this.polls.push(poll);
+					});
+					
                     this.loading = false;
                     this.page = response.current_page;
                     this.loadMore = response.current_page < response.last_page;

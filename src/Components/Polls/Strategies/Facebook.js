@@ -1,5 +1,5 @@
-import Pattern from '@/Components/Polls/Helpers/Pattern';
-import Strategy from '@/Components/Polls/Helpers/Strategy';
+import Pattern from '../Helpers/Pattern';
+import Strategy from '../Helpers/Strategy';
 
 export default class Facebook extends Strategy {
 

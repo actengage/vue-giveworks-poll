@@ -1,0 +1,61 @@
+// Styling for the footer
+
+footer {
+  padding: 25px 0;
+  background-color: $primary-blue;
+  color: white;
+  text-align: center;
+  span.copyright {
+    font-size: 90%;
+    line-height: 40px;
+    text-transform: none;
+    @include body-font;
+    font-weight: 500;
+    text-align: left;
+  }
+  ul.quicklinks {
+    font-size: 90%;
+    line-height: 40px;
+    margin-bottom: 0;
+    text-transform: none;
+    @include body-font;
+  }
+  .container {
+    .row {
+      .col-md-4 {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+    }
+  }
+}
+
+ul.social-buttons {
+  margin-bottom: 0;
+  li {
+    a {
+      font-size: 20px;
+      line-height: 50px;
+      display: block;
+      width: 50px;
+      height: 50px;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+      color: white;
+      border-radius: 100%;
+      outline: none;
+      background-color: $gray-900;
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $primary-blue;
+      }
+    }
+  }
+}
+
+.img-footer {
+  width: 20%;
+  margin: 10px 20px 10px 20px;
+}

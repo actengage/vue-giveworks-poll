@@ -9,6 +9,9 @@ const router = new Router({
         {
             name: 'poll',
             path: '/poll/:id',
+            props: {
+                maxWidth: 500
+            },
             component: () => import('@/Views/Index')
         }
     ]

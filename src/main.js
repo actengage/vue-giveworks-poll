@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import axios from 'axios';
 import App from '@/App.vue';
 import router from './router';
 import bugsnag from '@bugsnag/js';
@@ -17,9 +16,6 @@ if(process.env.NODE_ENV !== 'development') {
         notifyReleaseStages: ['production', 'staging']
     }).use(bugsnagVue, Vue);
 }
-
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ?
-    'https://giveworks.test/api/public/v1' : 'https://secure.giveworks.net/api/public/v1';
 
 export default new Vue({
     router,

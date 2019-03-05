@@ -1,4 +1,4 @@
-import * as Strategies from '@/Components/Polls/Strategies';
+import * as Strategies from '../Strategies';
 
 export default function match(url) {
     for(let i in Strategies) {

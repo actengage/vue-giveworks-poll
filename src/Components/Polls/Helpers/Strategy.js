@@ -1,4 +1,4 @@
-import Pattern from '@/Components/Polls/Helpers/Pattern';
+import Pattern from '../Helpers/Pattern';
 
 export default class Strategy {
 

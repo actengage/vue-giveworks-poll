@@ -11,6 +11,7 @@
     <poll
         v-else
         :id="id"
+        max-width="520px"
         api-key="$2y$10$GPHLvsJj4Ad3gxm/eJlvZO2MyrEClWZyjx4hwl5R686Y0.S8QNfbe"
         @toggle-loading="onToggleLoading"
         @error="onError" />

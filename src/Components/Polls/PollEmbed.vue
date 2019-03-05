@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import HasStrategy from '@/Mixins/HasStrategy';
-import Twitter from '@/Components/Embeds/Twitter';
-import Youtube from '@/Components/Embeds/Youtube';
-import Facebook from '@/Components/Embeds/Facebook';
+import Twitter from '../Embeds/Twitter';
+import Youtube from '../Embeds/Youtube';
+import Facebook from '../Embeds/Facebook';
+import HasStrategy from '../../Mixins/HasStrategy';
 
 export default {
 

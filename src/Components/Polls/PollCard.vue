@@ -34,7 +34,6 @@ import ProgressBar from 'vue-interface/src/Components/ProgressBar';
 import CardTitle from 'vue-interface/src/Components/Card/CardTitle';
 import CardHeader from 'vue-interface/src/Components/Card/CardHeader';
 import CardFooter from 'vue-interface/src/Components/Card/CardFooter';
-//import DounutChart from '@/Components/Charts/DounutChart';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';

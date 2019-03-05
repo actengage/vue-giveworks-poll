@@ -1,18 +1,24 @@
 <template>
 
-    <div class="poll" :class="{'loading': loading}">
+    <div class="poll" :class="{'loading': loading}" :style="style">
         <activity-indicator v-if="loading" label="Loading..." type="spinner" center />
         <div v-else>
-            <poll-form v-if="currentPoll" :api-key="apiKey" :poll="currentPoll" @next="onNext" />
+            <poll-form
+                v-if="currentPoll"
+                :api-key="apiKey"
+                :poll="currentPoll"
+                :request="httpRequestOptions"
+                @next="onNext" />
         </div>
     </div>
 
 </template>
 
 <script>
-import Poll from '@/Models/Poll';
-import PollForm from '@/Components/Polls/PollForm';
-import HttpRequestOptions from '@/Mixins/HttpRequestOptions';
+import PollForm from './PollForm';
+import Poll from '../../Models/Poll';
+import unit from 'vue-interface/src/Helpers/Unit';
+import HttpRequestOptions from '../../Mixins/HttpRequestOptions';
 import ActivityIndicator from 'vue-interface/src/Components/ActivityIndicator';
 
 export default {
@@ -26,6 +32,25 @@ export default {
     components: {
         PollForm,
         ActivityIndicator
+    },
+
+    props: {
+
+        id: [Number, String],
+
+        slug: [Number, String],
+
+        poll: Object,
+
+        model: Object,
+
+        apiKey: {
+            type: String,
+            required: true
+        },
+
+        maxWidth: [Number, String]
+
     },
 
     watch: {
@@ -45,40 +70,48 @@ export default {
 
     },
 
-    props: {
+    computed: {
 
-        id: [Number, String],
-
-        slug: [Number, String],
-
-        poll: Object,
-
-        model: Object,
-
-        apiKey: {
-            type: String,
-            required: true
+        style() {
+            return {
+                maxWidth: this.maxWidth ? unit(this.maxWidth) : null
+            };
         }
 
     },
-
+    
     methods: {
 
         onNext(poll) {
+            this.$emit('next', poll);
+
+            /*
             this.$router.push({name: 'poll', params: {
                 id: poll.id,
                 poll: poll
             }});
+            */
         },
 
         load(id) {
             this.loading = true;
 
-            return Poll.find(id, this.httpRequestOptions)
-                .then(model => {
-                    this.loading = false;
-                    this.currentPoll = model.toJSON();
-                });
+            if(id) {
+                return Poll.find(id, this.httpRequestOptions)
+                    .then(model => {
+                        this.loading = false;
+                        this.currentPoll = model.toJSON();
+                    });
+            }
+            else {
+                return Poll.search(null, this.httpRequestOptions)
+                    .then(response => {
+                        if(response.data.data.length) {
+                            this.loading = false;
+                            this.currentPoll = response.data.data[0];
+                        }
+                    });
+            }
         }
 
     },
@@ -116,10 +149,11 @@ export default {
 
 <style lang="scss">
 .poll {
+    max-width: 520px;
+
     &:not(.loading) {
         position: relative;
         margin: 0 auto;
-        max-width: 520px;
     }
 
     .fade-enter-active, .fade-leave-active {

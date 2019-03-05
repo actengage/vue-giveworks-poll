@@ -1,22 +1,22 @@
 <template>
 
    <div class="poll-question">
+
        <div class="poll-content" v-if="poll.html" v-html="poll.html" />
 
-        <img v-if="poll.embed" class="poll-img img-fluid mb-5" :src="poll.embed.url">
+        <img v-if="poll.embed" class="poll-img d-flex img-fluid mb-5 mx-auto" :src="poll.embed.url">
 
         <transition v-else-if="poll.options.include_embed" name="fade" mode="out-in">
             <poll-embed :key="poll.id" :poll="poll" class="mb-5" />
         </transition>
 
-
         <div class="d-flex mb-5">
             <btn-group
                 v-responsive-blocks="{selector: 'span'}"
-                toggle
                 :vertical="vertical"
                 :style="{'grid-template-columns': `repeat(${poll.answers.length}, minmax(${100 / poll.answers.length}%, 1fr)`}"
                 class="mx-auto"
+                toggle
                 @resize.native="onResize">
                 <btn
                     v-for="answer in poll.answers"
@@ -54,10 +54,10 @@
 </template>
 
 <script>
+import PollEmbed from './PollEmbed';
 import Btn from 'vue-interface/src/Components/Btn';
-import PollEmbed from '@/Components/Polls/PollEmbed';
 import BtnGroup from 'vue-interface/src/Components/BtnGroup';
-import ResponsiveBlocks from '@/Directives/ResponsiveBlocks';
+import ResponsiveBlocks from '../../Directives/ResponsiveBlocks';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShare } from '@fortawesome/free-solid-svg-icons/faShare';

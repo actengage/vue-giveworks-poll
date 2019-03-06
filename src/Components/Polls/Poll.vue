@@ -5,10 +5,14 @@
         <div v-else>
             <poll-form
                 v-if="currentPoll"
+                :step="step"
                 :api-key="apiKey"
                 :poll="currentPoll"
+                :scrollTo="scrollTo"
                 :request="httpRequestOptions"
-                @next="onNext" />
+                @step="onStep"
+                @next="onNext"
+                @slide-enter="onSlideEnter" />
         </div>
     </div>
 
@@ -40,9 +44,15 @@ export default {
 
         slug: [Number, String],
 
+        step: [Number, String],
+
         poll: Object,
 
         model: Object,
+        
+        scrollTo: {
+            type: [HTMLElement]
+        },
 
         apiKey: {
             type: String,
@@ -93,6 +103,14 @@ export default {
             */
         },
 
+        onSlideEnter(slide) {
+            this.$emit('slide-enter', slide);
+        },
+
+        onStep(poll) {
+            this.$emit('step', poll);
+        },
+
         load(id) {
             this.loading = true;
 
@@ -100,15 +118,17 @@ export default {
                 return Poll.find(id, this.httpRequestOptions)
                     .then(model => {
                         this.loading = false;
-                        this.currentPoll = model.toJSON();
+
+                        return this.currentPoll = model.toJSON();
                     });
             }
             else {
                 return Poll.search(null, this.httpRequestOptions)
                     .then(response => {
+                        this.loading = false; 
+
                         if(response.data.data.length) {
-                            this.loading = false;
-                            this.currentPoll = response.data.data[0];
+                            return this.currentPoll = response.data.data[0];
                         }
                     });
             }
@@ -119,7 +139,7 @@ export default {
     mounted() {
         if(this.startingPoll) {
             this.loading = false;
-            this.currentPoll = this.startingPoll;
+            this.$emit('load', this.currentPoll = this.startingPoll);
         }
         else if(!this.currentPoll) {
             this.load(this.id || this.slug).then(model => {

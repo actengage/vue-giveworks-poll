@@ -46,7 +46,7 @@ library.add(faEnvelope);
 
 export default {
 
-    name: 'poll-card',
+    name: 'PollCard',
 
     components: {
         Card,

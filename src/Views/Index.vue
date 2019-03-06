@@ -8,13 +8,17 @@
         </div>
     </div>
 
-    <poll
-        v-else
-        :id="id"
-        max-width="520px"
-        api-key="$2y$10$GPHLvsJj4Ad3gxm/eJlvZO2MyrEClWZyjx4hwl5R686Y0.S8QNfbe"
-        @toggle-loading="onToggleLoading"
-        @error="onError" />
+    <div v-else style="padding-bottom: 600px">
+        <poll
+            :id="id"
+            :step="step"
+            max-width="520px"
+            api-key="$2y$10$GPHLvsJj4Ad3gxm/eJlvZO2MyrEClWZyjx4hwl5R686Y0.S8QNfbe"
+            @load="onLoad"
+            @step="onStep"
+            @toggle-loading="onToggleLoading"
+            @error="onError" />
+    </div>
 </template>
 
 <script>
@@ -32,17 +36,45 @@ export default {
 
     watch: {
 
+        id() {
+            this.updateRoute();
+        },
+
+        step() {
+            this.updateRoute();
+        },
+
         '$route.params.id': function(value) {
             this.error = null;
             this.id = value;
+        },
+
+        '$route.params.step': function(value) {
+            this.step = value;
         }
 
     },
 
     methods: {
 
+        updateRoute() {
+            this.$router.push({
+                name: 'poll', params: {
+                    id: this.id, step: this.step
+                }
+            });
+        },
+
         onToggleLoading(value) {
             this.$emit('toggle-loading', value)
+        },
+
+        onLoad(model) {
+            this.id = model.id;
+        },
+
+        onStep(step) {
+            this.step = step;
         },
 
         onError(response) {
@@ -51,8 +83,15 @@ export default {
 
     },
 
+    mounted() {
+        if(this.$route.params.step) {
+            this.step = this.$route.params.step;
+        }
+    },
+
     data() {
         return {
+            step: null,
             error: null,
             id: this.$route.params.id
         }

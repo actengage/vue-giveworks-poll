@@ -7,8 +7,9 @@ const router = new Router({
     base: process.env.BASE_URL,
     routes: [
         {
+            alias: '/',
             name: 'poll',
-            path: '/poll/:id',
+            path: '/poll/:id?/:step?',
             props: {
                 maxWidth: 500
             },

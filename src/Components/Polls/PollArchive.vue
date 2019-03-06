@@ -40,7 +40,7 @@ import ActivityIndicator from 'vue-interface/src/Components/ActivityIndicator';
 
 export default {
 
-    name: 'poll-archive',
+    name: 'PollArchive',
 
     mixins: [
         HttpRequestOptions

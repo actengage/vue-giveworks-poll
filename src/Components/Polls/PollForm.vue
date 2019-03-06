@@ -18,7 +18,7 @@
         <slide-deck :active="active" @enter="onSlideEnter">
 
             <div key="question">
-                <poll-question v-model="form.answer" :poll="poll" :value="form.active" @input="active = 'contact'" />
+                <poll-question v-model="form.answer" :poll="poll" :value="form.active" @input="onSelectAnswer" />
             </div>
 
             <div key="contact">
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import scrollTo from 'vue-interface/src/Helpers/ScrollTo';
 import BaseForm from 'vue-interface/src/Components/BaseForm';
 import SlideDeck from 'vue-interface/src/Components/SlideDeck';
 
@@ -49,6 +50,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPoll } from '@fortawesome/free-solid-svg-icons/faPoll';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
+import { setTimeout } from 'timers';
 
 library.add(faPoll);
 library.add(faTimesCircle);
@@ -56,7 +58,7 @@ library.add(faExclamationTriangle);
 
 export default {
 
-    name: 'poll-form',
+    name: 'PollForm',
 
     components: {
         BaseForm,
@@ -69,11 +71,19 @@ export default {
 
     watch: {
 
+        active(value) {
+            this.$emit('step', value);
+        },
+
+        step(value) {
+            this.active = value;
+        },
+
         poll(value) {
             this.errors = null;
             this.activity = false;
-            this.model = new Poll(value);
             this.active = 'question';
+            this.model = new Poll(value);
             this.form = this.model.toJSON();
         }
 
@@ -106,6 +116,17 @@ export default {
             default() {
                 return {};
             }
+        },
+        
+        scrollTo: {
+            type: [HTMLElement]
+        },
+
+        step: {
+            type: [Number, String],
+            default() {
+                return 'question'
+            }
         }
 
     },
@@ -113,12 +134,24 @@ export default {
     methods: {
 
         onClickBack() {
-            this.form.answer = null;
-            this.active = 'question';
+            scrollTo(this.scrollTo || this.$el, 100);
+
+            this.$nextTick(() => {
+                this.form.answer = null;
+                this.active = 'question';
+            });
         },
 
         onClickCancel() {
             this.onClickBack();
+        },
+
+        onSelectAnswer() {
+            this.active = 'contact';
+
+            this.$nextTick(() => {
+                scrollTo(this.scrollTo || this.$el, 100);
+            });
         },
 
         onSlideEnter(slide) {
@@ -135,6 +168,10 @@ export default {
             this.poll.statistics = response.get('statistics');
             this.active = 'results';
             this.form.answer = null;
+            
+            this.$nextTick(() => {
+                scrollTo(this.scrollTo || this.$el, 100);
+            });
         },
 
         onSubmitComplete(event, success, response) {
@@ -168,7 +205,7 @@ export default {
             errors: null,
             loading: true,
             activity: false,
-            active: 'question'
+            active: this.step
         }
     }
 

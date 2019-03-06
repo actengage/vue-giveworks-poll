@@ -1,8 +1,6 @@
 <script>
 let baseURL = null;
 
-console.log(process.env.NODE_ENV);
-
 switch(process.env.NODE_ENV) {
     case 'staging':
         baseURL = 'https://dev5.giveworks.net/api/public/v1';
